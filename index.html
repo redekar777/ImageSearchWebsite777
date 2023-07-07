@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Search Website</title>
+    <link rel="stylesheet" href="styleapi.css">
+    
+</head>
+<body>
+
+    <h1>Image Search Website</h1>
+    <form action="">
+        <input type="text" id="search-input" placeholder="Search for images">
+        <button id="search-button">Search</button>
+    </form>
+
+    <div class="search-results" id="search-results">
+        
+    </div>
+
+    <button id="show-more-button">Show more</button>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy;2023 Image Search Website | Rohit Redekar. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="scriptapi.js"></script>
+    <script>
+        // Fetch random images from Unsplash API
+        fetch('https://api.unsplash.com/photos/random?client_id=4XD5vHampV2Mhz71oLPw1urqXeSC9DOHuuto2A97ZoQ&count=3')
+          .then(response => response.json())
+          .then(data => {
+            const searchResults = document.getElementById('search-results');
+      
+            data.forEach(image => {
+              const searchResult = document.createElement('div');
+              searchResult.classList.add('search-result');
+      
+              const img = document.createElement('img');
+              img.src = image.urls.regular;
+              img.alt = 'Image';
+      
+              const p = document.createElement('p');
+             
+      
+              searchResult.appendChild(img);
+              searchResult.appendChild(p);
+              searchResults.appendChild(searchResult);
+            });
+          })
+          .catch(error => console.log(error));
+      </script>
+      
+    
+</body>
+</html>
